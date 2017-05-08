@@ -1,1 +1,2 @@
 This is the first text file.
+I'm adding a line here too
