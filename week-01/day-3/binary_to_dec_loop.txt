@@ -1,0 +1,26 @@
+let value = 0
+let hatvany = 0
+let binary_length = 0
+let decimal = 0
+let binary = ""
+basic.forever(() => {
+    binary = serial.readLine()
+    decimal = 0
+    binary_length = binary.length
+    basic.showNumber(binary_length)
+    for (let index = 0; index <= binary_length; index++) {
+        hatvany = binary_length - (index + 1)
+        if (binary.charAt(index).compare("1") == 0) {
+            value = Math.pow(2, hatvany)
+            decimal = decimal + value
+        } else {
+            value = 0
+            decimal = decimal + value
+        }
+    }
+    if (binary_length == 0) {
+        serial.writeLine("error: empty message!")
+    } else {
+        serial.writeNumber(decimal)
+    }
+})

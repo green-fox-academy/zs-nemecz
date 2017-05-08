@@ -1,0 +1,23 @@
+let rem = 0
+let binary_character = ""
+let binary_num_str = ""
+let dec_num = 0
+let dec_num_str = ""
+basic.forever(() => {
+    dec_num_str = serial.readLine()
+    dec_num = parseInt(dec_num_str)
+    binary_num_str = ""
+    serial.writeNumber(dec_num)
+    while (dec_num == 0) {
+        binary_character = ""
+        rem = dec_num % 2
+        dec_num = dec_num / 2
+        if (rem == 1) {
+            binary_character = "1"
+        } else {
+            binary_character = "0"
+        }
+        binary_num_str = "" + binary_character + binary_num_str
+    }
+    serial.writeLine(binary_num_str)
+})

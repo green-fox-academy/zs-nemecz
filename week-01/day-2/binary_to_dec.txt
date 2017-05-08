@@ -1,0 +1,32 @@
+let decimal = 0
+let dec2 = 0
+let dec1 = 0
+let dec0 = 0
+let dec3 = ""
+let binary2 = ""
+let binary1 = ""
+let binary0 = ""
+let binary = ""
+basic.forever(() => {
+    binary = serial.readLine()
+    binary0 = binary.charAt(0)
+    binary1 = binary.charAt(1)
+    binary2 = binary.charAt(2)
+    dec3 = binary.charAt(3)
+    dec0 = parseInt(binary0)
+    dec1 = parseInt(binary1)
+    dec2 = parseInt(binary2)
+    if (dec0 == 1) {
+        dec0 = 4
+    }
+    if (dec1 == 1) {
+        dec1 = 2
+    }
+    if (dec2 == 1) {
+        dec2 = 1
+    }
+    decimal = dec0 + dec1
+    decimal = decimal + dec2
+    basic.showNumber(decimal)
+    serial.writeNumber(decimal)
+})

@@ -1,0 +1,15 @@
+let message = ""
+radio.onDataPacketReceived(({receivedString}) => {
+    serial.writeString(receivedString)
+    basic.showIcon(IconNames.Skull)
+    basic.clearScreen()
+    basic.clearScreen()
+})
+serial.onDataReceived(serial.delimiters(Delimiters.NewLine), () => {
+    message = serial.readString()
+    basic.showIcon(IconNames.Yes)
+    basic.pause(500)
+    basic.clearScreen()
+    radio.sendString(message)
+})
+radio.setGroup(200)

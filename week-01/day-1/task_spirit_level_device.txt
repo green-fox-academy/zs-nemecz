@@ -1,0 +1,43 @@
+let roller = 0
+let pitcher = 0
+basic.forever(() => {
+    basic.clearScreen()
+    pitcher = 2
+    roller = 2
+    if (input.rotation(Rotation.Pitch) != 0) {
+        if (input.rotation(Rotation.Pitch) < 0) {
+            if (input.rotation(Rotation.Pitch) < -10) {
+                pitcher += -2
+            } else {
+                pitcher += -1
+            }
+        } else {
+            if (input.rotation(Rotation.Pitch) > 10) {
+                pitcher += 2
+            } else {
+                pitcher += 1
+            }
+        }
+    } else {
+        pitcher = 2
+    }
+    if (input.rotation(Rotation.Roll) != 0) {
+        if (input.rotation(Rotation.Roll) < 0) {
+            if (input.rotation(Rotation.Roll) < -10) {
+                roller += -2
+            } else {
+                roller += -1
+            }
+        } else {
+            if (input.rotation(Rotation.Roll) > 10) {
+                roller += 2
+            } else {
+                roller += 1
+            }
+        }
+    } else {
+        roller = 2
+    }
+    led.plot(roller, pitcher)
+    basic.pause(200)
+})
