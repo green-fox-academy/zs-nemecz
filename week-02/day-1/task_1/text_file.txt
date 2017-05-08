@@ -1,2 +1,3 @@
 This is the first text file.
 I'm adding a line task_2/text_file.txt
+Add a 3rd line
