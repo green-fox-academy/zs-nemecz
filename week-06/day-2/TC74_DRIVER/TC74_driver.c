@@ -29,7 +29,7 @@ int TWI_start()
 	//TODO
 	//Send start signal
 	TWCR = (1<<TWINT) | (1<<TWSTA) | (1<<TWEN);
-
+	
 	// TODO:
 	// Wait for TWINT Flag set. This indicates that
 	//the START condition has been transmitted.
@@ -44,7 +44,7 @@ void TWI_stop(void)
 {
 	//TODO
 	//Send stop signal
-	//TWCR |= 1<<TWINT;	TWCR |= 1<<TWSTO;
+	//TWCR |= 1<<TWINT;	TWCR = (1<<TWINT) | (1<<TWSTO) | (1<<TWEN);
 }
 
 uint8_t TWI_read_ack(void)
@@ -54,8 +54,9 @@ uint8_t TWI_read_ack(void)
 	//Wait for TWINT Flag set. This indicates that
 	//the DATA has been transmitted, and ACK/
 	//NACK has been received.
-	while(!(TWCR &(1 << TWINT)));
+	TWCR |= 1 << TWINT;
 	TWCR |= 1 << TWEA;
+	while(!(TWCR &(1 << TWINT)));
 
 	int status = get_status();
 	printf("status after read with ack: %x\n\r", status);
@@ -91,9 +92,14 @@ void TWI_write(uint8_t u8data)
 	//Wait for TWINT Flag set. This indicates that
 	//the DATA has been transmitted, and ACK/
 	//NACK has been received.
+	
+	// put data in register
 	TWDR = u8data;
-	TWCR = (1<<TWINT) | (1<<TWEN);
+	TWCR = (1<<TWINT) | (1<<TWEN);	
+	// wait for flag
 	while(!(TWCR &(1 << TWINT)));
+	
+	// print status
 	int status = get_status();
 	printf("status after write %x\n\r", status);
 }
