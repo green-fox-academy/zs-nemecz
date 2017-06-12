@@ -33,10 +33,10 @@ void timer_init()
 
 int set_duty_cycle(uint8_t duty_cycle)
 {
-	if (duty_cycle > 100) {
+	if ((duty_cycle > 100) || (duty_cycle < 0)) {
 		return -1;
 	} else {
-		OCR0A = (duty_cycle / 100) * 255;
+		OCR0A = ((float)duty_cycle / 100) * 255;
 		return 1;
 	}
 }
