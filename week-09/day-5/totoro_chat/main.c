@@ -72,6 +72,11 @@ int main()
                 print_info();
                 send_discovery_request();
                 break;
+            case 's':
+                clrscr();
+                print_info();
+                save_to_file();
+                break;
             default:
                 clrscr();
                 print_info();
@@ -97,6 +102,7 @@ void print_info()
     printf("n   Set user name\n");
     printf("l   List known users\n");
     printf("d   Send discovery request\n");
+    printf("s   Save user list to file\n");
     printf("m   Send message\n");
     printf("l   Start logging\n");
 }

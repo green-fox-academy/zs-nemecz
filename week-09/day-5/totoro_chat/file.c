@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <time.h>
 #include "file.h"
+#include "users.h"
 
 int get_write_file_name()
 {
@@ -41,4 +42,23 @@ int write_data_to_file(char *data)
 	// Close file
 	fclose(f);
 	return 0;
+}
+
+int save_to_file()
+{
+    char path[200];
+    printf("Please give a file name:\t");
+    gets(path);
+    if (path == NULL)
+        return -1;
+
+    FILE *file = fopen(path, "w");
+    if (file == NULL)
+        return -1;
+    fprintf(file, "Name\tPort\tIP\n");
+    for (int i = 0; i < users.cntr; i++) {
+        fprintf(file, "%s\t%d\t%s\n", users.u[i].name, users.u[i].port, users.u[i].IP_address);
+    }
+
+    fclose(file);
 }
