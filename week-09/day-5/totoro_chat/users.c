@@ -36,8 +36,10 @@ int select_user (char *user_name)
 {
     int user_index = -1;
     for (int i = 0; i < users.cntr; i++) {
-        if (strcmp(user_name, users.u[i].name) == 0)
+        if (strcmp(user_name, users.u[i].name) == 0) {
             user_index = i;
+            return user_index;
+        }
     }
     return user_index;
 }
@@ -45,7 +47,8 @@ int select_user (char *user_name)
 int find_user (struct in_addr *IP_address)
 {
     int user_index = -1;
-    char user_IP = inet_ntoa(*IP_address);
+    char user_IP[200];
+    strcpy(user_IP, inet_ntoa(*IP_address));
     for (int i = 0; i < users.cntr; i++) {
         if (strcmp(user_IP, users.u[i].IP_address) == 0)
             user_index = i;

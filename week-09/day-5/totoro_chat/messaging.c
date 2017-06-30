@@ -44,7 +44,7 @@ void message_listener()
         while ( temporary_client_socket == SOCKET_ERROR ) {
             temporary_client_socket = accept(server_socket, &messaging_address, &address_size);
         }
-        char user_name[255];
+        char user_name[300];
         int user_index = find_user(&messaging_address.sin_addr);
 
         if (user_index != -1) {
@@ -58,7 +58,7 @@ void message_listener()
         char recvbuf[200] = "";
 
         bytesRecv = recv(temporary_client_socket, recvbuf, 200, 0 );
-        printf("%s: '%s'\n", recvbuf);
+        printf("%s: '%s'\n", user_name, recvbuf);
 
         closesocket(temporary_client_socket);
     }
